@@ -3,15 +3,14 @@ const qrcode = require('qrcode-terminal');
 const express = require('express');
 const app = express();
 
-// Isso evita que o Render derrube o bot por inatividade
-app.get('/', (req, res) => res.send('Bot da EA Moto Peças Online!'));
+app.get('/', (req, res) => res.send('Bot Online!'));
 app.listen(process.env.PORT || 3000);
 
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        // ESSA LINHA ABAIXO É A MAIS IMPORTANTE:
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
+        // ESSA LINHA É A CHAVE DO SUCESSO AGORA:
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-146.0.7680.31/chrome-linux64/chrome',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -23,14 +22,12 @@ const client = new Client({
 });
 
 client.on('qr', (qr) => {
-    // Gera o QR Code no terminal do Render
     qrcode.generate(qr, {small: true});
-    console.log('SCANNEIE O QR CODE ACIMA PARA CONECTAR');
+    console.log('SCANNEIE O QR CODE ABAIXO:');
 });
 
 client.on('ready', () => {
-    console.log('O Bot da EA Moto Peças está PRONTO e ONLINE!');
+    console.log('Bot da EA Moto Peças pronto!');
 });
 
-// Inicializa o bot
 client.initialize();
