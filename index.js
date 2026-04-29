@@ -14,9 +14,9 @@ app.listen(port, () => {
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: {
+     puppeteer: {
         args: [
-            '--no-sandbox', 
+            '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
@@ -24,8 +24,7 @@ const client = new Client({
             '--no-zygote',
             '--single-process',
             '--disable-gpu'
-        ],
-        executablePath: '/usr/bin/google-chrome-stable'
+        ]
     }
 });
 
