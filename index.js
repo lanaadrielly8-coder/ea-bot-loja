@@ -9,14 +9,8 @@ app.listen(process.env.PORT || 3000);
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        // Agora o bot vai procurar o Chrome sozinho, sem caminho fixo
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu',
-            '--no-zygote'
-        ],
+        // Deixe apenas isso, o bot vai usar o que estiver no sistema
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
 client.on('qr', qr => qrcode.generate(qr, {small: true}));
