@@ -14,17 +14,16 @@ app.listen(port, () => {
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-     puppeteer: {
+    puppeteer: {
+        executablePath: '/opt/render/.cache/puppeteer/chrome/linux-146.0.7680.31/chrome-linux64/chrome', // Caminho que o erro mostrou
+        handleSIGTERM: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--no-first-run',
-            '--no-zygote',
-            '--single-process',
-            '--disable-gpu'
-        ]
+            '--disable-gpu',
+            '--no-zygote'
+        ],
     }
 });
 
