@@ -8,9 +8,9 @@ app.listen(process.env.PORT || 3000);
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: {
-        // ESSA LINHA É A CHAVE DO SUCESSO AGORA:
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-146.0.7680.31/chrome-linux64/chrome',
+  puppeteer: {
+        // ESSA LINHA É A PONTE QUE FALTAVA:
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -19,8 +19,6 @@ const client = new Client({
             '--no-zygote'
         ],
     }
-});
-
 client.on('qr', (qr) => {
     qrcode.generate(qr, {small: true});
     console.log('SCANNEIE O QR CODE ABAIXO:');
